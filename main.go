@@ -1,7 +1,7 @@
 package main
 
 import (
-	"io/ioutil"
+	"io/ioutil" //deprecated it seems
 	"log"
 	"path/filepath"
 
