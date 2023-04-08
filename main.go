@@ -32,6 +32,20 @@ func main() {
 
 	add(root, rootDir)
 
+	tree.SetSelectedFunc(func(node *tview.TreeNode) {
+		ref := node.GetReference()
+		if ref == nil {
+			return
+		}
+		children := node.GetChildren()
+		if len(children) == 0 {
+			path := ref.(string)
+			add(node, path)
+		} else {
+			node.SetExpanded(!node.IsExpanded())
+		}
+	})
+
 	if err := tview.NewApplication().SetRoot(tree, true).Run(); err != nil {
 		log.Fatal(err)
 	}
