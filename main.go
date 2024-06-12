@@ -1,8 +1,8 @@
 package main
 
 import (
-	"io/ioutil" //deprecated it seems
 	"log"
+	"os"
 	"path/filepath"
 
 	"github.com/gdamore/tcell/v2"
@@ -10,13 +10,13 @@ import (
 )
 
 func main() {
-	rootDir := "/"
+	rootDir := "/home/sid"
 	root := tview.NewTreeNode(rootDir).SetColor(tcell.ColorLavender)
 
 	tree := tview.NewTreeView().SetRoot(root).SetCurrentNode(root)
 
 	add := func(target *tview.TreeNode, path string) {
-		files, err := ioutil.ReadDir(path)
+		files, err := os.ReadDir(path)
 		if err != nil {
 			log.Fatal(err)
 		}
@@ -49,5 +49,4 @@ func main() {
 	if err := tview.NewApplication().SetRoot(tree, true).Run(); err != nil {
 		log.Fatal(err)
 	}
-
 }
